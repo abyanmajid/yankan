@@ -3,6 +3,25 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Next Client
+client/node_modules
+client/.pnp
+client/.pnp.js
+client/.yarn/install-state.gz
+client/coverage
+client/.next/
+client/out/
+client/build
+client/.DS_Store
+client/*.pem
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/.env*.local
+client/.vercel
+client/*.tsbuildinfo
+client/next-env.d.ts
+
 # User-specific files
 *.rsuser
 *.suo

@@ -1,0 +1,6 @@
+@yankan_HostAddress = http://localhost:5001
+
+GET {{yankan_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -14,11 +14,11 @@
 </p>
 
 <p align="center">
-  Kanban board for managing personal and team projects.
+  Kanban board with ASP.NET Core Microservices, Next.js UI, and PostgreSQL database using Supabase C# Client.
 </p>
 
 <p align="center">
-  <b>A submission for INFO1111 advanced self-learning task.</b>
+  <b>Built as my submission for INFO1111 advanced self-learning task.</b>
 </p>
 
 <p align="center">

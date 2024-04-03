@@ -21,6 +21,10 @@
   <b>Built as my submission for INFO1111 advanced self-learning task.</b>
 </p>
 
-<p align="center">
-  IN DEVELOPMENT
-</p>
+# Demo
+
+TBA
+
+# Solution Overview
+
+TBA

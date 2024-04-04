@@ -6,7 +6,7 @@ public class CreateBoardRequest {
     public Guid[] Tasks { get; set; }
 }
 
-public class CreateBoardResponse {
+public class BoardResponse {
     public Guid Id { get; set; }
     public string Name { get; set; }
     public Guid[] Members { get; set; }

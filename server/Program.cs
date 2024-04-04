@@ -6,7 +6,7 @@ using yankan.Requests;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -60,4 +60,8 @@ app.Run();
 // "/board/<id>": Get board by id (GET)
 // "/board/<id>": Update board by id (PUT)
 // "/board/<id>": Delete board by id (DELETE)
-// "/tasks/":
+// "/tasks": Get all tasks (GET)
+// "/tasks": Create a new task (POST)
+// "/tasks/<id>": Get task by id (GET)
+// "/tasks/<id>": Update task by id (PUT)
+// "/tasks/<id>": Delete task by id (DELETE)

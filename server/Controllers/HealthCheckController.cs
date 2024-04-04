@@ -6,7 +6,7 @@ namespace yankan.Controllers
     public class HealthCheckController: ControllerBase
     {
         [HttpGet("/")]
-        public IActionResult Get()
+        public IActionResult HealthCheck()
         {
             return Ok("Hello World!\n");
         }

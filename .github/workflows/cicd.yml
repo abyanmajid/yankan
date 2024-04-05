@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core application to Web App yankan20240405134553
+name: CI/CD
 on:
   push:
     branches:

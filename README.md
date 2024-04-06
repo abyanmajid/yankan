@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://github.com/abyanmajid/kindercode/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
-  <img alt="ci-badge" src="https://github.com/abyanmajid/yankan/actions/workflows/ci.yml/badge.svg">
+  <img alt="cicd-badge" src="https://github.com/abyanmajid/yankan/actions/workflows/cicd.yml/badge.svg">
   <img alt="ASP.NET" src="https://img.shields.io/badge/ASP.NET Core 7-purple.svg?style=flat&logo=dotnet&logoColor=white">
   <img alt="Next JS" src="https://img.shields.io/badge/Next.js 14-black?style=flat&logo=next.js&logoColor=white">
   <img alt="Supabase" src="https://img.shields.io/badge/Supabase-darkgreen.svg?style=flat&logo=supabase&logoColor=white">

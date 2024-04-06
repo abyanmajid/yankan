@@ -11,8 +11,7 @@ type paramsType = {
 }
 
 const KanbanBoardPage = async (params: paramsType) => {
-  const user = await currentUser();
-  const userId = user!.id;
+
   return (
     <div className="flex flex-col h-screen overflow-y-scroll">
       <div className="m-8">

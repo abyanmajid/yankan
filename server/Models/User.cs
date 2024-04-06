@@ -8,7 +8,7 @@ namespace yankan.Models;
 public class User : BaseModel
 {
     [PrimaryKey("id", false)]
-    public Guid Id { get; set; }
+    public string Id { get; set; }
 
     [Column("name")]
     public string Name { get; set; }
@@ -24,4 +24,7 @@ public class User : BaseModel
 
     [Column("created_at")]
     public DateTimeOffset CreatedAt { get; set; }
+
+    [Column("clerk_id")]
+    public string ClerkId { get; set; }
 }

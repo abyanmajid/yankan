@@ -6,9 +6,13 @@ import DeleteBoardBtn from '@/components/kanban/delete-board'
 import CreateTaskBtn from '@/components/kanban/create-task'
 import { currentUser } from '@clerk/nextjs'
 
-const KanbanBoardPage = async () => {
+type paramsType = {
+  boardId: string,
+}
+
+const KanbanBoardPage = async (params: paramsType) => {
   const user = await currentUser();
-  console.log(user!.id)
+  const userId = user!.id;
   return (
     <div className="flex flex-col h-screen overflow-y-scroll">
       <div className="m-8">

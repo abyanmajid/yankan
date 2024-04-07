@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { cn } from "@/lib/utils"
 import { Button } from '../ui/button'
 import {
@@ -54,12 +54,16 @@ const CreateTaskBtn = () => {
     },
   })
 
+  const [open, setOpen] = useState(false);
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    setOpen(false);
   }
+
   return (
     <div>
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button>Create New Task</Button>
         </DialogTrigger>

@@ -40,6 +40,7 @@ namespace yankan.Controllers
             var board = new Board
             {
                 Name = request.Name,
+                Owner = request.Owner,
                 Members = request.Members,
                 Tasks = request.Tasks,
             };
@@ -101,6 +102,7 @@ namespace yankan.Controllers
                 }
 
                 model.Name = request.Name;
+                model.Owner = request.Owner;
                 model.Members = request.Members;
                 model.Tasks = request.Tasks;
 

@@ -13,6 +13,9 @@ public class Board : BaseModel
     [Column("name")]
     public string Name { get; set; }
 
+    [Column("owner")]
+    public string Owner {get; set;}
+
     [Column("members")]
     public Guid[] Members { get; set; }
 

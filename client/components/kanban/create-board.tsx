@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/popover"
 import { toast } from "@/components/ui/use-toast"
 import createBoard from '@/actions/createBoard'
+import { useToast } from "@/components/ui/use-toast"
 
 type propsType = {
   userId: string,
@@ -62,6 +63,10 @@ const CreateBoardBtn = (props: propsType) => {
       Members: [props.userId],
       Tasks: [],
     }
+    await createBoard(data)
+    toast({
+      description: `Board "${values.boardName}" has been successfully created!`,
+    })
     setOpen(false)
   }
 

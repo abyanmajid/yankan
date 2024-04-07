@@ -29,7 +29,7 @@ const KanbanPage = async () => {
         <div className="mb-8 grid grid-cols-2">
           <h1 className="font-extrabold text-3xl flex items-center">Kanban Boards</h1>
           <div className="grid justify-end">
-            <CreateBoardBtn />
+            <CreateBoardBtn userId={userId} />
           </div>
         </div>
         <div className="grid grid-cols-4">

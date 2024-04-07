@@ -1,5 +1,5 @@
 export default async function createBoard(data: any) {
-  const WEB_API_URL = process.env.WEB_API_URL;
+  const WEB_API_URL = "https://yankan20240405134553.azurewebsites.net";
 
   try {
     const response = await fetch(`${WEB_API_URL}/boards`, {

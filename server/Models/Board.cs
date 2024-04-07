@@ -17,7 +17,7 @@ public class Board : BaseModel
     public string Owner {get; set;}
 
     [Column("members")]
-    public Guid[] Members { get; set; }
+    public string[] Members { get; set; }
 
     [Column("tasks")]
     public Guid[] Tasks { get; set; }

@@ -35,13 +35,17 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import createBoard from '@/actions/createBoard'
 
+type propsType = {
+  userId: string,
+}
+
 const formSchema = z.object({
   boardName: z.string().min(1, {
     message: "Board name must not be empty.",
   }),
 })
 
-const CreateBoardBtn = () => {
+const CreateBoardBtn = (props: propsType) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,6 +56,12 @@ const CreateBoardBtn = () => {
   const [open, setOpen] = useState(false);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const data = {
+      Name: values.boardName,
+      Owner: props.userId,
+      Members: [props.userId],
+      Tasks: [],
+    }
     setOpen(false)
   }
 

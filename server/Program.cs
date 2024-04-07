@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors;
 using Supabase;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";

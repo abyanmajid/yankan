@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using yankan.Models;
 using yankan.Requests;
+using Microsoft.AspNetCore.Cors;
 
 namespace yankan.Controllers
 {
+    [EnableCors("MyAllowSpecificOrigins")]
     [ApiController]
     [Route("[controller]")]
     public class TaskController : ControllerBase
@@ -35,6 +37,7 @@ namespace yankan.Controllers
             }
         }
 
+        [DisableCors]
         [HttpPost("/tasks")]
         public async Task<IActionResult> CreateTask([FromBody] CreateTaskRequest request)
         {

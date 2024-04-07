@@ -1,5 +1,4 @@
 export default async function fetchUser(userId: string) {
-  "use server"
   const url = `https://yankan20240405134553.azurewebsites.net/users/${userId}`;
 
   try {

@@ -1,11 +1,9 @@
-export default async function updateUser(data: any, userId: string) {
-  console.log(userId)
+export default async function createTask(data: any) {
   const WEB_API_URL = "https://yankan20240405134553.azurewebsites.net";
 
-  console.log("THIS IS THE DATA:", data)
   try {
-    const response = await fetch(`${WEB_API_URL}/users/${userId}`, {
-      method: 'PUT',
+    const response = await fetch(`${WEB_API_URL}/tasks`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },

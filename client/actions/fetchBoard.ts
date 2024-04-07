@@ -1,5 +1,4 @@
 export default async function fetchBoard(boardId: string) {
-  "use server"
   const url = `https://yankan20240405134553.azurewebsites.net/boards/${boardId}`;
 
   try {
@@ -22,7 +21,6 @@ export default async function fetchBoard(boardId: string) {
     }
 
     const boardData = await response.json();
-    console.log('Board data:', boardData);
     return boardData;
   } catch (error: any) {
     console.error('Fetching board failed:', error.message);

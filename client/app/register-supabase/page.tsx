@@ -11,7 +11,7 @@ const RegisterSupabase = async () => {
   } catch (error: any) {
     const data = {
       ClerkId: user!.id,
-      Name: user!.firstName! + user!.lastName!,
+      Name: user!.firstName! + " " + user!.lastName!,
       Email: user!.emailAddresses[0].emailAddress,
       OwnedBoards: [],
       SharedBoards: [],

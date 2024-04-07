@@ -11,7 +11,7 @@ public class Task : BaseModel
     public Guid Id { get; set; }
 
     [Column("creator")]
-    public Guid Creator { get; set; }
+    public string Creator { get; set; }
 
     [Column("type")]
     public string Type { get; set; }
@@ -20,7 +20,7 @@ public class Task : BaseModel
     public string TaskStatement { get; set; }
 
     [Column("assignees")]
-    public Guid[] Assignees { get; set; }
+    public string[] Assignees { get; set; }
 
     [Column("due")]
     public DateTimeOffset Due { get; set; }

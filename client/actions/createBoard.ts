@@ -1,4 +1,5 @@
 import updateUser from "./updateUser"
+import fetchUser from "./fetchUser"
 
 export default async function createBoard(data: any, userId: string) {
   const WEB_API_URL = "https://yankan20240405134553.azurewebsites.net";
@@ -20,11 +21,19 @@ export default async function createBoard(data: any, userId: string) {
     const result = await response.json();
     console.log('Success:', result);
 
-    // const newUserData = {
-    //   OwnedBoards: [],
-    // }
-    //
-    // updateUser(newUserData, userId)
+    const user = await fetchUser(userId);
+
+    const ownedBoards = [...user.ownedBoards, result.id];
+
+    const newUserData = {
+      ClerkId: user.clerkId,
+      Name: user.name,
+      Email: user.email,
+      OwnedBoards: ownedBoards,
+      SharedBoards: user.sharedBoards,
+    }
+
+    await updateUser(newUserData, userId)
   } catch (error: any) {
     console.error('Error:', error.message);
   }

@@ -33,6 +33,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { toast } from "@/components/ui/use-toast"
+import createTask from '@/actions/createTask'
+import { useToast } from "@/components/ui/use-toast"
 
 const formSchema = z.object({
   task: z.string().min(1, {
@@ -46,7 +48,11 @@ const formSchema = z.object({
   }),
 })
 
-const CreateTaskBtn = () => {
+type propsType = {
+  userId: string,
+}
+
+const CreateTaskBtn = (props: propsType) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -56,8 +62,20 @@ const CreateTaskBtn = () => {
 
   const [open, setOpen] = useState(false);
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const dueDate = new Date(values.due)
+    const isoDueDate = dueDate.toISOString();
+    const data = {
+      Creator: props.userId,
+      Type: values.type,
+      TaskStatement: values.task,
+      Assignees: [],
+      Due: isoDueDate,
+    }
+    await createTask(data)
+    toast({
+      description: `Successfully created a new task!`,
+    })
     setOpen(false);
   }
 

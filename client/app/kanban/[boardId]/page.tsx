@@ -5,12 +5,22 @@ import { GlobeIcon } from '@radix-ui/react-icons'
 import DeleteBoardBtn from '@/components/kanban/delete-board'
 import CreateTaskBtn from '@/components/kanban/create-task'
 import { currentUser } from '@clerk/nextjs'
+import fetchBoard from '@/actions/fetchBoard'
+import { notFound } from 'next/navigation'
 
 type paramsType = {
   boardId: string,
 }
 
-const KanbanBoardPage = async (params: paramsType) => {
+const KanbanBoardPage = async ({ params }: { params: paramsType }) => {
+  const user = await currentUser()
+  const board = await fetchBoard(params.boardId)
+  if (board.members.includes(user!.id)) {
+    console.log("ACCEPTED: User is a member of the board.")
+  } else {
+    console.log("DENIED: User is NOT a member of the board.")
+    notFound()
+  }
 
   return (
     <div className="flex flex-col h-screen overflow-y-scroll">
@@ -19,7 +29,7 @@ const KanbanBoardPage = async (params: paramsType) => {
           <h1 className="font-extrabold text-3xl flex items-center"><GlobeIcon width={28} height={28} />&nbsp;Untitled Board</h1>
           <div className="grid justify-end">
             <div className="flex gap-2">
-              <CreateTaskBtn />
+              <CreateTaskBtn userId={user!.id} />
               <DeleteBoardBtn />
             </div>
           </div>

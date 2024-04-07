@@ -52,7 +52,7 @@ namespace yankan.Controllers
 
             if (newTask != null)
             {
-                return Ok($"Successfully created new task with ID: {newTask.Id}");
+                return Ok(newTask);
             }
             else
             {

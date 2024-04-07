@@ -51,7 +51,7 @@ namespace yankan.Controllers
 
             if (newUser != null)
             {
-                return Ok($"Successfully created new user with ID: {newUser.Id}");
+                return Ok(newUser);
             }
             else
             {

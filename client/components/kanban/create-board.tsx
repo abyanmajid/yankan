@@ -63,7 +63,7 @@ const CreateBoardBtn = (props: propsType) => {
       Members: [props.userId],
       Tasks: [],
     }
-    await createBoard(data)
+    await createBoard(data, props.userId)
     toast({
       description: `Board "${values.boardName}" has been successfully created!`,
     })

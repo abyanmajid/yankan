@@ -50,7 +50,7 @@ namespace yankan.Controllers
 
             if (newBoard != null)
             {
-                return Ok($"Successfully created new board with ID: {newBoard.Id}");
+                return Ok(newBoard);
             }
             else
             {

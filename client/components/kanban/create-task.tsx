@@ -72,6 +72,7 @@ const CreateTaskBtn = (props: propsType) => {
       Assignees: [],
       Due: isoDueDate,
     }
+    console.log(data)
     await createTask(data)
     toast({
       description: `Successfully created a new task!`,

@@ -10,8 +10,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:3000",
-                                             "http://yankan.vercel.app");
+                          policy.WithOrigins("https://yankan.vercel.app");
                           policy.AllowAnyHeader();
                           policy.AllowCredentials();
                           policy.AllowAnyMethod();

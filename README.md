@@ -22,11 +22,3 @@
 </p>
 
 <!-- <h3 align="center">:rocket: LIVE App: <a href="https://yankan.vercel.app/">yankan.vercel.app</a> (ALPHA v0.1.0) :rocket:</h1> -->
-
-# Demo
-
-TBA
-
-# Solution Overview
-
-TBA

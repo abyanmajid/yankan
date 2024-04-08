@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  Kanban board with ASP.NET Core Microservices, Next.js UI, and PostgreSQL database using Supabase C# Client.
+  Kanban board with monolithic REST API in ASP.NET Core, NextJS UI, PostgreSQL-Supabase database, and Clerk Authentication.
 </p>
 
 <p align="center">

@@ -35,6 +35,7 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import createBoard from '@/actions/createBoard'
 import { useToast } from "@/components/ui/use-toast"
+import { useRouter } from "next/navigation"
 
 type propsType = {
   userId: string,
@@ -47,6 +48,7 @@ const formSchema = z.object({
 })
 
 const CreateBoardBtn = (props: propsType) => {
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -68,6 +70,7 @@ const CreateBoardBtn = (props: propsType) => {
       description: `Board "${values.boardName}" has been successfully created!`,
     })
     setOpen(false)
+    router.refresh()
   }
 
   return (

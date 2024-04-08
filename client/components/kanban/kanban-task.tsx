@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { z } from "zod"
 import {
   Card,
@@ -21,6 +21,11 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import AssignForm from './assign-form'
+import { formatTimestamp } from '@/lib/utils'
+import { createClient } from "@/lib/supabase/client";
+import { toast } from "@/components/ui/use-toast"
+import { useRouter } from "next/navigation"
+import fetchBoard from "@/actions/fetchBoard"
 
 const assignFormSchema = z.object({
   email: z.string().min(1, {
@@ -28,56 +33,113 @@ const assignFormSchema = z.object({
   }),
 })
 
-const KanbanTask = () => {
+type propsType = {
+  boardId: string,
+  id: string,
+  creator: string,
+  type: string,
+  task_statement: string,
+  assignees: string[],
+  due: string
+}
+
+const KanbanTask = (props: propsType) => {
+  const router = useRouter()
+  const [open, setOpen] = useState(false);
   function assignOnSubmit(values: z.infer<typeof assignFormSchema>) {
     console.log(values)
   }
+
+  async function updateTaskStatus(toType: string) {
+    const supabase = createClient();
+    const { error } = await supabase
+      .from('tasks')
+      .update({ type: toType })
+      .eq('id', props.id)
+    toast({
+      description: "Successfully updated task status!",
+    })
+    setOpen(false);
+    router.refresh()
+  }
+
+  async function deleteTask() {
+    const supabase = createClient();
+    const board = await fetchBoard(props.boardId);
+    console.log(board)
+
+    const response = await supabase
+      .from('boards')
+      .update({
+        tasks: board.tasks.filter((taskId: any) => taskId !== props.id)
+      })
+      .eq('id', props.boardId);
+
+    const { error } = await supabase
+      .from('tasks')
+      .delete()
+      .eq('id', props.id)
+    toast({
+      description: "Successfully deleted task!",
+    })
+    setOpen(false);
+    router.refresh()
+  }
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className="text-left">
         <Card className="m-4 hover:bg-zinc-900">
           <CardContent className="pt-6">
-            <CardDescription>Due: April 19, 2024</CardDescription>
-            <p>Card Content</p>
+            <CardDescription>Due: {formatTimestamp(props.due)}</CardDescription>
+            <p>{props.task_statement}</p>
           </CardContent>
           <CardFooter className="grid">
-            <CardDescription className="mb-2">Issued by: Abyan Majid</CardDescription>
-            <div className="text-sm">
-              Assignees: <Badge variant="secondary">Abyan Majid</Badge>
-            </div>
+            <CardDescription className="mb-2">Issued by: {props.creator}</CardDescription>
+            {props.assignees.length != 0 ?
+              <div className="text-sm">
+                Assignees: {props.assignees.map((assignee, key) => (
+                  <Badge key={key} variant="secondary">{assignee}</Badge>
+                ))}
+              </div> : ""}
           </CardFooter>
         </Card>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogDescription>
-            Due: April 19, 2024
+            Due: {formatTimestamp(props.due)}
           </DialogDescription>
-          <DialogTitle className="py-2">Card Content</DialogTitle>
+          <DialogTitle className="py-2">{props.task_statement}</DialogTitle>
           <DialogDescription>
-            Issued by: Abyan Majid
+            Issued by: {props.creator}
           </DialogDescription>
           <div className="pt-4">
-            Assignees: <Badge variant="secondary">Abyan Majid</Badge>
+            {props.assignees.length != 0 ?
+              <div className="text-sm">
+                Assignees: {props.assignees.map((assignee, key) => (
+                  <Badge key={key} variant="secondary">{assignee}</Badge>
+                ))}
+              </div> : ""}
             <div className="py-4">
               <Separator />
             </div>
           </div>
           <span className="font-medium text-sm">Update Status</span>
           <div className="grid grid-cols-3 gap-2">
-            <Button variant="secondary">To Do</Button>
-            <Button variant="outline">Doing</Button>
-            <Button variant="outline">Done</Button>
+            <Button onClick={() => updateTaskStatus("todo")} variant={props.type === "todo" ? "secondary" : "outline"}>To Do</Button>
+            <Button onClick={() => updateTaskStatus("doing")} variant={props.type === "doing" ? "secondary" : "outline"}>Doing</Button>
+            <Button onClick={() => updateTaskStatus("done")} variant={props.type === "done" ? "secondary" : "outline"}>Done</Button>
           </div>
-          <div className="py-4">
-            <Separator />
-          </div>
-          <AssignForm onSubmit={assignOnSubmit} formSchema={assignFormSchema} />
+          {/* <div className="py-4"> */}
+          {/*   <Separator /> */}
+          {/* </div> */}
+          {/* <AssignForm onSubmit={assignOnSubmit} formSchema={assignFormSchema} /> */}
           <div className="py-4">
             <Separator />
           </div>
           <div className="flex">
-            <Button variant="destructive">Delete Task</Button>
+            <Button onClick={() => deleteTask()} variant="destructive">Delete Task</Button>
           </div>
         </DialogHeader>
       </DialogContent>

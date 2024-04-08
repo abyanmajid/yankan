@@ -35,6 +35,7 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import createTask from '@/actions/createTask'
 import { useToast } from "@/components/ui/use-toast"
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   task: z.string().min(1, {
@@ -50,9 +51,11 @@ const formSchema = z.object({
 
 type propsType = {
   userId: string,
+  boardId: string,
 }
 
 const CreateTaskBtn = (props: propsType) => {
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -66,18 +69,19 @@ const CreateTaskBtn = (props: propsType) => {
     const dueDate = new Date(values.due)
     const isoDueDate = dueDate.toISOString();
     const data = {
-      Creator: props.userId,
-      Type: values.type,
-      TaskStatement: values.task,
-      Assignees: [],
-      Due: isoDueDate,
+      creator: props.userId,
+      type: values.type,
+      task_statement: values.task,
+      assignees: [],
+      due: isoDueDate,
     }
     console.log(data)
-    await createTask(data)
+    await createTask(data, props.boardId)
     toast({
       description: `Successfully created a new task!`,
     })
     setOpen(false);
+    router.refresh()
   }
 
   return (
@@ -136,7 +140,7 @@ const CreateTaskBtn = (props: propsType) => {
                         </FormItem>
                         <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>
-                            <RadioGroupItem value="Done" />
+                            <RadioGroupItem value="done" />
                           </FormControl>
                           <FormLabel className="font-normal">
                             Done

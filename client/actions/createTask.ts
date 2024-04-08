@@ -1,15 +1,24 @@
-export default async function createTask(data: any) {
+import { createClient } from "@/lib/supabase/client";
+import fetchBoard from "./fetchBoard"
+
+export default async function createTask(taskData: any, boardId: string) {
   const WEB_API_URL = "https://yankan20240405134553.azurewebsites.net";
 
+  const supabase = createClient();
+
   try {
-    const response = await fetch(`${WEB_API_URL}/tasks`, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    });
+    const { data, error } = await supabase
+      .from('tasks')
+      .insert(taskData)
+      .select()
+
+    const board = await fetchBoard(boardId);
+    console.log(board)
+
+    const response = await supabase
+      .from('boards')
+      .update({ tasks: [...board.tasks, data![0].id] })
+      .eq('id', boardId)
 
     console.log('Success')
   } catch (error: any) {

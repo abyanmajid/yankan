@@ -1,7 +1,5 @@
-import { redirect } from "next/navigation"
-
-export default async function fetchBoard(boardId: string) {
-  const url = `https://yankan20240405134553.azurewebsites.net/boards/${boardId}`;
+export default async function fetchUser(taskId: string) {
+  const url = `https://yankan20240405134553.azurewebsites.net/tasks/${taskId}`;
 
   try {
     const response = await fetch(url, {
@@ -22,10 +20,10 @@ export default async function fetchBoard(boardId: string) {
       throw new Error(`Error ${response.status}: ${JSON.stringify(errorData)}`);
     }
 
-    const boardData = await response.json();
-    return boardData;
+    const taskData = await response.json();
+    return taskData;
   } catch (error: any) {
-    console.error('Fetching board failed:', error.message);
-    redirect("/kanban")
+    console.error('Fetching task failed:', error.message);
+    throw error;
   }
 }

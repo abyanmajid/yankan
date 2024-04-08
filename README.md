@@ -21,6 +21,8 @@
   <b>Built as my submission for INFO1111 advanced self-learning task.</b>
 </p>
 
+<h3 align="center">:rocket: LIVE App: <a href="https://yankan.vercel.app/">yankan.vercel.app</a> (BETA v0.1.0) :rocket:</h1>
+
 # Demo
 
 TBA
